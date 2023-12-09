@@ -1,12 +1,12 @@
-import livro from "../models/Livro.js";
+import autor from "../models/Autor.js";
 
-class LivroController {
+class AutorController {
     
-    static async listarLivros(req, res) {
+    static async listarAutores(req, res) {
 
         try {
-            const listaLivros = await livro.find({}).populate("autor").exec();
-            res.status(200).json(listaLivros);
+            const listaAutores = await autor.find({});
+            res.status(200).json(listaAutores);
         }
         catch(erro) {
             res.status(500).json({
@@ -29,16 +29,16 @@ class LivroController {
         }
     }
 
-    static async cadastrarLivro(req, res) {
+    static async cadastrarAutor(req, res) {
         try {
-            const novoLivro = await livro.create(req.body);
+            const novoAutor = await autor.create(req.body);
             res.status(201).json({
                 message: "Criado com sucesso",
-                livro: novoLivro
+                autor: novoAutor
             });
         } catch(erro) {
             res.status(500).json({
-                message: `${erro.message} - falha ao cadastrar livro`
+                message: `${erro.message} - falha ao cadastrar autor`
             });
         }
     }
@@ -72,4 +72,4 @@ class LivroController {
 
 }
 
-export default LivroController;
+export default AutorController;
